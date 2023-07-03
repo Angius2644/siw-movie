@@ -1,0 +1,143 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2709
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Arial-BoldMT;\f1\fswiss\fcharset0 ArialMT;\f2\froman\fcharset0 Times-Bold;
+}
+{\colortbl;\red255\green255\blue255;\red255\green255\blue255;}
+{\*\expandedcolortbl;;\cssrgb\c99992\c100000\c99988;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}.}{\leveltext\leveltemplateid1\'02\'00.;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listname ;}\listid1}
+{\list\listtemplateid2\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid101\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid2}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\sa240\partightenfactor0
+
+\f0\b\fs24 \cf2 Casi d'uso:
+\f1\b0 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sa240\partightenfactor0
+\ls1\ilvl0
+\f2\b \cf2 {\listtext	1.	}
+\f0 Visualizza lista film e artisti
+\f1\b0 : L'utente generico pu\'f2 visualizzare una lista di film e artisti disponibili nel sistema.\
+\ls1\ilvl0
+\f2\b {\listtext	2.	}
+\f0 Visualizza dettagli film
+\f1\b0 : L'utente generico pu\'f2 visualizzare i dettagli di un film selezionato dalla lista.\
+\ls1\ilvl0
+\f2\b {\listtext	3.	}
+\f0 Visualizza dettagli artista
+\f1\b0 : L'utente generico pu\'f2 visualizzare i dettagli di un artista selezionato dalla lista.\
+\ls1\ilvl0
+\f2\b {\listtext	4.	}
+\f0 Ricerca film
+\f1\b0 : L'utente generico pu\'f2 eseguire una ricerca per trovare film corrispondenti a determinati criteri (Anno).\
+\ls1\ilvl0
+\f2\b {\listtext	5.	}
+\f0 Ricerca artista
+\f1\b0 : L'utente generico pu\'f2 eseguire una ricerca per trovare artisti corrispondenti a determinati criteri (Cognome).\
+\ls1\ilvl0
+\f2\b {\listtext	6.	}
+\f0 Aggiungi film
+\f1\b0 : L'amministratore pu\'f2 aggiungere un nuovo film al sistema, inserendo tutti i dati necessari (titolo, anno, copertina, attori, ecc.).\
+\ls1\ilvl0
+\f2\b {\listtext	7.	}
+\f0 Aggiungi artista
+\f1\b0 : L'amministratore pu\'f2 aggiungere un nuovo artista al sistema, inserendo tutti i dati necessari (nome, cognome, ecc.).\
+\ls1\ilvl0
+\f2\b {\listtext	8.	}
+\f0 Gestisci film
+\f1\b0 : L'amministratore pu\'f2 gestire i dati di un film esistente, inclusi l'aggiornamento delle informazioni, l'eliminazione del film e l'associazione/rimozione di regista e attori.\
+\ls1\ilvl0
+\f2\b {\listtext	9.	}
+\f0 Gestisci artista
+\f1\b0 : L'amministratore pu\'f2 gestire i dati di un artista esistente, inclusi l'aggiornamento delle informazioni e l'eliminazione dell'artista.\
+\ls1\ilvl0
+\f2\b {\listtext	10.	}
+\f0 Inserisci recensione
+\f1\b0 : L'utente registrato pu\'f2 inserire una recensione per un film specifico, fornendo il proprio commento, un titolo e una valutazione.\
+\ls1\ilvl0
+\f2\b {\listtext	11.	}
+\f0 Modifica recensione
+\f1\b0 : L'utente registrato pu\'f2 modificare la propria recensione di un film, aggiornando il commento e/o la valutazione.\
+\ls1\ilvl0
+\f2\b {\listtext	12.	}
+\f0 Elimina recensione
+\f1\b0 : L'amministratore pu\'f2 eliminare una singola recensione di un film.\
+\ls1\ilvl0
+\f2\b {\listtext	13.	}
+\f0 Elimina tutte le recensioni
+\f1\b0 : L'amministratore pu\'f2 eliminare tutte le recensioni associate a un film.\
+\pard\pardeftab720\partightenfactor0
+
+\fs22 \cf2 \
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\pard\pardeftab720\sa240\partightenfactor0
+
+\f0\b\fs24 \cf2 Modello ER, sono presenti le seguenti relazioni:\
+\
+\pard\tx20\tx212\pardeftab720\li212\fi-213\sa240\partightenfactor0
+\ls2\ilvl0
+\f1\b0\fs26 \cf2 {\listtext	\uc0\u8226 	}
+\f0\b Artist
+\f1\b0\fs24  e 
+\f0\b\fs26 Movie
+\f1\b0\fs24  hanno una relazione uno-a-molti attraverso le propriet\'e0 
+\f0\b\fs26 starredMovies
+\f1\b0\fs24  e 
+\f0\b\fs26 directedMovies
+\f1\b0\fs24 . Ogni 
+\f0\b\fs26 Artist
+\f1\b0\fs24  pu\'f2 recitare in molti film e dirigere molti film, mentre ogni 
+\fs26 Movie
+\fs24  \'e8 associato a un solo artista come regista.\
+\ls2\ilvl0
+\fs26 {\listtext	\uc0\u8226 	}
+\f0\b Movie
+\f1\b0\fs24  e 
+\f0\b\fs26 Artist
+\f1\b0\fs24  hanno una relazione many-to-many attraverso la tabella di join tra 
+\fs26 Movie e Artist
+\fs24 . Ogni 
+\f0\b\fs26 Movie
+\f1\b0\fs24  pu\'f2 avere molti 
+\f0\b\fs26 Artist
+\fs24  come attori
+\f1\b0  e ogni 
+\f0\b\fs26 Artist
+\f1\b0\fs24  pu\'f2 recitare in molti 
+\f0\b\fs26 Movie
+\f1\b0\fs24 .\
+\ls2\ilvl0
+\fs26 {\listtext	\uc0\u8226 	}
+\f0\b Movie
+\f1\b0\fs24  e 
+\f0\b\fs26 Review
+\f1\b0\fs24  hanno una relazione uno-a-molti. Ogni 
+\f0\b\fs26 Movie
+\f1\b0\fs24  pu\'f2 avere molte 
+\f0\b\fs26 Review
+\f1\b0\fs24 , mentre ogni 
+\f0\b\fs26 Review
+\f1\b0\fs24  \'e8 associata a un solo 
+\f0\b\fs26 Movie
+\f1\b0\fs24 .\
+\ls2\ilvl0
+\fs26 {\listtext	\uc0\u8226 	}
+\f0\b Review
+\f1\b0\fs24  e 
+\f0\b\fs26 Credentials
+\f1\b0\fs24  hanno una relazione molti-a-uno. Molte 
+\f0\b\fs26 Review
+\f1\b0\fs24  possono essere scritte da un unico 
+\f0\b\fs26 Credentials
+\f1\b0\fs24  (utente registrato).\
+}
