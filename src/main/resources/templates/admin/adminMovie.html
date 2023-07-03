@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Dettagli Film</title>
+		<link rel="stylesheet" href="/css/stile.css" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
+	</head>
+	<body>
+		<header>
+			<div th:if="${userDetails}">
+				<span th:text="${userDetails.username}"></span>
+				<a href="/logout">Logout</a>
+			</div>
+			<div th:unless="${user}">
+				<a href="/login">Login</a>
+			</div>
+		</header>
+		
+		<div class="logo-container">
+			<a id="logo-link" href="/">
+				<div style="text-align: center;"><img src="/images/logo-siw.png" width="50%" /></div>
+			</a>
+		</div>
+		<div th:if="${movie}" class="panel">
+			<h1 style="text-align: center;" id="title">Dettagli su <span th:text="${movie.title}">nomeFilm</span></h1>
+			
+			<div class="user-container" style="flex-direction: unset; padding-bottom: 15px;">
+				
+				<div class="info-panel">
+					<span><a th:href="@{'/admin/movie/' + ${movie.id}}"><img class="img-border" width="160" height="220" th:src="${movie.getCoverImageBase64}" alt="Cover Image"></a></span>
+					<span th:text="'Titolo: ' + ${movie.title}">Up!</span>
+					<span th:text="'Anno: ' + '(' + ${movie.year} + ')'">2000</span>
+					<span>Regista: <a th:if="${movie.director}" class="director" th:href="@{'/artist' + '/' + ${movie.director.id}}"><span th:text="${movie.director.name} + ' ' + ${movie.director.surname}">Regista</span></a></span>
+				</div>
+				<div class="review-panel">
+					<div th:if="${reviews==null || reviews.isEmpty()}">
+						<div style="margin: 20px 0 20px 0;"><span style="font-size: 25px;">Non ci sono ancora recensioni, scrivine una!</span></div>
+						</div>
+						<div style="text-align: center; margin: 5% auto; display: block ruby;">
+							<a class="genericButton" th:href="@{'/addReviewToMovie/' + ${movie.id}}">Scrivi una recensione</a>
+							<a th:if="${reviews!=null && !reviews.isEmpty()}" id="deleteBtn" class="genericButton" th:href="@{'/admin/deleteAllReviewsFromMovie/' + ${movie.id}}">Elimina tutte le recensioni</a>
+						</div>
+						<div th:each="review : ${reviews}" class="review-box">
+							<span class="review-title" th:text="${review.title} + ' '"></span><span class="review-rate" th:text="${review.starRate} + '/5'">RateNumber</span>
+							<p style="word-wrap: break-word;" th:text="${review.description}"></p>
+							<p style="font-size: 10px;" th:text="${review.credentials.username} + ' - ' + ${review.creationDate}">dateAndUsername</p>
+							<p>
+							<a th:if="${review.credentials.username} == ${userDetails.username}" class="genericButton" style="padding: 3px 5px; margin: unset; float: right;" th:href="@{'/updateReview/' + ${review.id} + '/' + ${movie.id}}">Modifica la recensione</a>
+							<a id="deleteBtn" class="genericButton" style="padding: 3px 5px; margin: unset;" th:href="@{'/admin/deleteReview/' + ${review.id} + '/' + ${movie.id}}">Cancella la recensione</a>
+							</p>
+						</div>
+				</div>
+			</div>
+			<div class="user-container" style="padding-top: 0%;">
+				<div class="textAddActor" th:if="${movie.actors != null && movie.actors.isEmpty()}">Non ci sono attori per questo film</div>
+				<div th:if="${movie.actors != null && !movie.actors.isEmpty()}">Elenco degli attori del film:</div>
+				<div style="margin-top: 5%;">
+					<ul style="margin:auto;">
+						<li class="actorList" th:each="actor : ${movie.actors}">
+							<a th:href="@{'/artist/'+ ${actor.id}}">
+								<h3><span class="li-text" th:text="${actor.name} + ' (' + ${actor.surname} + ')'">title</span></h3>
+								<img style="object-fit: cover;" width="120" height="152" th:src="${actor.getImgOfPictureBase64}">
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div th:unless="${movie}" class="panel">
+			<div class="user-container">
+				<span class="div-value"><h2>Non Esiste.</h2></span>
+			</div>
+		</div>
+	</body>
+</html>

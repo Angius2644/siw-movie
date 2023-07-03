@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Aggiorna Artista</title>
+		<link rel="stylesheet" href="/css/stile.css" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
+	</head>
+	<body>
+		<header>
+			<div th:if="${userDetails}">
+				<span th:text="${userDetails.username}"></span>
+				<a href="/logout">Logout</a>
+			</div>
+			<div th:unless="${user}">
+				<a href="/login">Login</a>
+			</div>
+		</header>
+		
+		<div class="logo-container">
+			<a id="logo-link" href="/">
+				<div style="text-align: center;"><img src="/images/logo-siw.png" width="50%" /></div>
+			</a>
+		</div>
+		<div th:if="${artist}" class="panel">
+			<h1 style="text-align: center;" id="title">Aggiorna l'artista</h1>
+			
+			<div class="user-container" style="flex-direction: unset;">
+				
+				<div style="gap: 8px;" class="info-panel">
+					<span><a th:href="@{'/admin/artist/' + ${artist.id}}"><img style="object-fit: cover;" class="img-border" width="160" height="220" th:src="${artist.getImgOfPictureBase64}"/></a></span>
+					<span th:text="'Nome: ' + ${artist.name}">nome</span>
+					<span th:text="'Cognome: ' + ${artist.surname}">cognome</span>
+				</div>
+				<div class="review-panel">
+					<div style="text-align: center; margin: 5% auto; display: block ruby;">
+						<a class="genericButton" th:href="@{'/admin/updateArtist/' + ${artist.id}}">Aggiorna dati</a>
+						<a id="deleteBtn" class="genericButton" th:href="@{'/admin/deleteArtist/' + ${artist.id}}">Elimina l'artista</a>
+					</div>
+
+					<div style="text-align: center;">Film in cui e' regista:</div>
+
+					<div class="user-container" style="flex-direction: unset;">
+						<div style="margin-top: 4px;">
+							<ul style="margin:auto;">
+								<li class="actorList" th:each="directedMovie : ${directedMovies}">
+									<a th:href="@{'/admin/movie/'+ ${directedMovie.id}}">
+										<h3><span class="li-text" th:text="${directedMovie.title} + ' (' + ${directedMovie.year} + ')'">title</span></h3>
+										<img width="120" height="152" th:src="${directedMovie.getCoverImageBase64}">
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					
+					<div style="text-align: center;">Film in cui ha recitato:</div>
+					
+					<div class="user-container" style="flex-direction: unset;">
+						<div style="margin-top: 4px;">
+							<ul style="margin:auto;">
+								<li class="actorList" th:each="actedMovie : ${starredMovies}">
+									<a th:href="@{'/admin/movie/'+ ${actedMovie.id}}">
+										<h3><span class="li-text" th:text="${actedMovie.title} + ' (' + ${actedMovie.year} + ')'">title</span></h3>
+										<img width="120" height="152" th:src="${actedMovie.getCoverImageBase64}">
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div th:unless="${artist}">Artista non esistente</div>
+				</div>
+			</body>
+		</html>

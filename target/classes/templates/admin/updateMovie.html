@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Aggiorna Film</title>
+		<link rel="stylesheet" href="/css/stile.css" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
+	</head>
+	<body>
+		<header>
+			<div th:if="${userDetails}">
+				<span th:text="${userDetails.username}"></span>
+				<a href="/logout">Logout</a>
+			</div>
+			<div th:unless="${user}">
+				<a href="/login">Login</a>
+			</div>
+		</header>
+		
+		<div class="logo-container">
+			<a id="logo-link" href="/">
+				<div style="text-align: center;"><img src="/images/logo-siw.png" width="50%" /></div>
+			</a>
+		</div>
+		<div class="panel" style="padding-bottom: 40px;">
+			<h1 style="text-align: center;">Aggiorna un film</h1>
+			
+			<div th:if="${movie}" class="user-container" style="flex-direction: unset;">
+				<form class="form-elements" th:action="@{'/admin/updateMovie/' + ${movie.id}}" method="POST" th:object="${movie}" enctype="multipart/form-data" accept-charset="UTF-8">
+					<div th:if="${#fields.hasGlobalErrors()}">
+						<p style="color: red;" th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
+					</div>
+					
+						<label>Titolo:</label>
+						<input type="text" th:field="${movie.title}" />
+						<span style="color: red;" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">
+						</span>
+					
+						<label>Anno:</label>
+						<input type="number" th:field="${movie.year}"/>
+						<span style="color: red;" th:if="${#fields.hasErrors('year')}" th:errors="*{year}"></span>
+						
+						<label>Immagine di copertina:</label>
+        				<input type="file" accept="image/*" name="coverImageFile">
+					
+					<div style="text-align: center;">
+						<span style="text-align: center;"><button type="submit">Invia</button></span>
+					</div>
+				</form>
+			</div>
+			<div style="text-align: center;" th:unless="${movie}">Il film che stai cercando di aggiornare non esiste.</div>
+		</body>
+	</html>

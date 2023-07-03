@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> Siw - Homepage</title>
+		<link rel="stylesheet" href="/css/stile.css" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	</head>
+	<body>
+		<header>
+			<div th:if="${userDetails}">
+				<span th:text="${userDetails.username}"></span>
+				<a href="/logout">Logout</a>
+			</div>
+			<div th:unless="${user}">
+				<a href="/login">Login</a>
+			</div>
+		</header>
+		
+		<div class="logo-container">
+			<a id="logo-link" href="/">
+				<div style="text-align: center;"><img src="/images/logo-siw.png" width="50%" /></div>
+			</a>
+		</div>
+		<div class="panel">
+			<h1 style="text-align: center;" id="title">Benvenuto nell'archivio</h1>
+			
+			<div class="user-container">
+				
+				<div class="panel-grid">
+					<a class="link" href="admin/movie">
+						<div class="box">
+							<div class="div-value"><h2>Archivio</h2></div>
+							<div class="div-label">Visualizza l'archivo completo</div>
+						</div>
+					</a>
+					<a class="link" href="/artist">
+						<div class="box">
+							<div class="div-value"><h2>Artisti</h2></div>
+							<div class="div-label">Consulta la lista degli artisti presenti</div>
+						</div>
+					</a>
+					<a class="link" href="/formSearchMovies">
+						<div class="box">
+							<div class="div-value"><h2>Cerca</h2></div>
+							<div class="div-label">Trova il tuo film preferito con una ricerca</div>
+						</div>
+					</a>
+				</div>
+				<h1 style="text-align: center; margin: 3%;" id="title">Sezione Admin</h1>
+				<div class="panel-grid">
+					<a class="link" href="/admin/indexMovie">
+						<div class="box">
+							<div class="div-value"><h2>Gestisci Film</h2></div>
+							<div class="div-label">Aggiorna/Rimuovi Film</div>
+						</div>
+					</a>
+					<a class="link" href="/admin/indexArtist">
+						<div class="box">
+							<div class="div-value"><h2>Gestisci Artisti</h2></div>
+							<div class="div-label">Aggiorna/Rimuovi Artisti</div>
+						</div>
+					</a>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

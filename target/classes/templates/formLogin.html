@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Login</title>
+		<link rel="stylesheet" href="/css/stile.css" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
+	</head>
+	<body>
+		<header>
+			<div th:if="${userDetails}">
+				<span th:text="${userDetails.username}"></span>
+				<a href="/logout">Logout</a>
+			</div>
+			<div th:unless="${user}">
+				<a href="/login">Login</a>
+			</div>
+		</header>
+		
+		<div class="logo-container">
+			<a id="logo-link" href="/">
+				<div style="text-align: center;"><img src="/images/logo-siw.png" width="50%" /></div>
+			</a>
+		</div>
+		<div class="panel" style="padding-bottom: 40px;">
+			<h1 style="text-align: center;">Login</h1>
+			
+			<div class="user-container" style="flex-direction: unset;">
+				
+				<form class="form-elements" th:action="@{/login}" method="POST" accept-charset="UTF-8">
+					
+					<label>Username:</label>
+					<input name="username" type="text" required />
+					
+					<label>Password:</label>
+					<input name="password" type="password" required />
+					
+					<div th:if="${param.error != null}">
+						<span style="color: red;">Username o password errati</span>
+					</div>
+					
+					<span style="text-align: center;"><button type="submit">Login</button></span>
+					
+				</form>
+			</div>
+			<div style="text-align: center;">
+				<a style="text-decoration: none; margin-bottom: auto;" class="register" th:href="@{/register}" th:text="Registrati">Registrati</a>
+			</div>
+		</body>
+	</html>

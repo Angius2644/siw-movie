@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Nuovo Artista</title>
+		<link rel="stylesheet" href="/css/stile.css" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
+	</head>
+	<body>
+		<header>
+			<div th:if="${userDetails}">
+				<span th:text="${userDetails.username}"></span>
+				<a href="/logout">Logout</a>
+			</div>
+			<div th:unless="${user}">
+				<a href="/login">Login</a>
+			</div>
+		</header>
+		
+		<div class="logo-container">
+			<a id="logo-link" href="/">
+				<div style="text-align: center;"><img src="/images/logo-siw.png" width="50%" /></div>
+			</a>
+		</div>
+		<div class="panel" style="padding-bottom: 40px;">
+			<h1 style="text-align: center;">Aggiungi un artista</h1>
+			
+			<div class="user-container" style="flex-direction: unset;">
+				<form class="form-elements" th:action="@{/admin/artist}" method="POST" th:object="${artist}" enctype="multipart/form-data" accept-charset="UTF-8">
+					<div th:if="${#fields.hasGlobalErrors()}">
+						<p style="color: red;" th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
+					</div>
+					
+						<label>Nome:</label>
+						<input type="text" th:field="${artist.name}" />
+						<span style="color: red;" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">
+						</span>
+					
+						<label>Cognome:</label>
+						<input type="text" th:field="${artist.surname}"/>
+						<span style="color: red;" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"></span>
+					
+						<label>Data di nascita:</label>
+						<input type="date" th:field="${artist.dateOfBirth}"/>
+						<span style="color: red;" th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}"></span>
+
+						<label>Data di (eventuale) morte:</label>
+						<input type="date" th:field="${artist.dateOfDeath}"/>
+						<span style="color: red;" th:if="${#fields.hasErrors('dateOfDeath')}" th:errors="*{dateOfDeath}"></span>
+						
+						<label>Immagine di copertina:</label>
+        				<input type="file" accept="image/*" name="profileImageFile">
+					
+					<div style="text-align: center;">
+						<span style="text-align: center;"><button type="submit">Invia</button></span>
+					</div>
+				</form>
+			</div>
+		</body>
+	</html>

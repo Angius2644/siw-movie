@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Cerca Film</title>
+		<link rel="stylesheet" href="/css/stile.css" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
+	</head>
+	<body>
+		<header>
+			<div th:if="${userDetails}">
+				<span th:text="${userDetails.username}"></span>
+				<a href="/logout">Logout</a>
+			</div>
+			<div th:unless="${user}">
+				<a href="/login">Login</a>
+			</div>
+		</header>
+		
+		<div class="logo-container">
+			<a id="logo-link" href="/">
+				<div style="text-align: center;"><img src="/images/logo-siw.png" width="50%" /></div>
+			</a>
+		</div>
+		<div class="panel" style="padding-bottom: 40px;">
+			<h1 style="text-align: center;">Cerca film per anno</h1>
+			
+			<div class="user-container" style="flex-direction: unset;">
+				
+				<form class="form-elements" th:action="@{/searchMovies}" method="POST" accept-charset="UTF-8">
+					
+					<label>Anno:</label>
+					<input type="number" th:value="${year}" name="year" required/>
+					<div th:if="${error}" th:text="*{error}" style="color: red;"></div>
+					
+					<span style="text-align: center;"><button type="submit">Cerca</button></span>
+					
+				</form>
+			</div>
+		</body>
+	</html>

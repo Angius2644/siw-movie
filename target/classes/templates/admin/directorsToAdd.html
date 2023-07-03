@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Seleziona Regista</title>
+		<link rel="stylesheet" href="/css/stile.css" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
+	</head>
+	<body>
+		<header>
+			<div th:if="${userDetails}">
+				<span th:text="${userDetails.username}"></span>
+				<a href="/logout">Logout</a>
+			</div>
+			<div th:unless="${user}">
+				<a href="/login">Login</a>
+			</div>
+		</header>
+		
+		<div class="logo-container">
+			<a id="logo-link" href="/">
+				<div style="text-align: center;"><img src="/images/logo-siw.png" width="50%" /></div>
+			</a>
+		</div>
+		<div th:if="${artists}" class="panel">
+			<h1 style="text-align: center;" id="title">Seleziona il regista per <span th:text="${movie.title}">movie.title</span></h1>
+			<div style="text-align: center;" th:if="${artists}">Seleziona il regista dal seguente elenco:</div>
+			
+			<div class="user-container" style="flex-direction: unset;">
+				<span style="text-align: center;" th:if="${artists==null || artists.isEmpty()}">Non ci sono registi nel sistema</span>
+				<div style="margin-top: 4px;">
+					<ul>
+						<li class="actorList" th:each="artist : ${artists}">
+							<a th:href="@{'/admin/setDirectorToMovie/'+ ${artist.id}+'/'+${movie.id}}">
+								<h3><span class="li-text" th:text="${artist.name} + ' (' + ${artist.surname} + ')'">title</span></h3>
+								<img style="object-fit: cover;" width="120" height="152" th:src="${artist.getImgOfPictureBase64}">
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

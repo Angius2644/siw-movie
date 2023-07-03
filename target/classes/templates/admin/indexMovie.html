@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Gestione Film</title>
+		<link rel="stylesheet" href="/css/stile.css" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
+	</head>
+	<body>
+		<header>
+			<div th:if="${userDetails}">
+				<span th:text="${userDetails.username}"></span>
+				<a href="/logout">Logout</a>
+			</div>
+			<div th:unless="${user}">
+				<a href="/login">Login</a>
+			</div>
+		</header>
+		
+		<div class="logo-container">
+			<a id="logo-link" href="/">
+				<div style="text-align: center;"><img src="/images/logo-siw.png" width="50%" /></div>
+			</a>
+		</div>
+		<div class="panel">
+			<h1 style="text-align: center;" id="title">Pannello gestione Film</h1>
+			
+			<div class="user-container">
+				
+				<div class="panel-grid">
+					<a class="link" href="/admin/formNewMovie">
+						<div class="box">
+							<div class="div-value"><h2>Nuovo Film</h2></div>
+							<div class="div-label">Inserisci i dati di un nuovo film</div>
+						</div>
+					</a>
+					<a class="link" href="/admin/manageMovies">
+						<div class="box">
+							<div class="div-value"><h2>Gestisci</h2></div>
+							<div class="div-label">Gestisci i film nell'archivio</div>
+						</div>
+					</a>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

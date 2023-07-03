@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Registrazione</title>
+		<link rel="stylesheet" href="/css/stile.css" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
+	</head>
+	<body>
+		<header>
+			<div th:if="${userDetails}">
+				<span th:text="${userDetails.username}"></span>
+				<a href="/logout">Logout</a>
+			</div>
+			<div th:unless="${user}">
+				<a href="/login">Login</a>
+			</div>
+		</header>
+		
+		<div class="logo-container">
+			<a id="logo-link" href="/">
+				<div style="text-align: center;"><img src="/images/logo-siw.png" width="50%" /></div>
+			</a>
+		</div>
+		<div class="panel" style="padding-bottom: 40px;">
+			<h1 style="text-align: center;">Utente registrato correttamente!</h1>
+			
+			<div class="user-container" style="text-align: center; gap: 10px;">
+				
+				<div>
+					<span>Nome: </span>
+					<span th:text="${user.name}"></span>
+				</div>
+				<div>
+					<span>Cognome: </span>
+					<span th:text="${user.surname}"></span>
+				</div>
+				<div>
+					<span>Email: </span>
+					<span th:text="${user.email}"></span>
+				</div>
+			</div>
+		</body>
+	</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Elenco Artisti</title>
+		<link rel="stylesheet" href="/css/stile.css" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
+	</head>
+	<body>
+		<header>
+			<div th:if="${userDetails}">
+				<span th:text="${userDetails.username}"></span>
+				<a href="/logout">Logout</a>
+			</div>
+			<div th:unless="${user}">
+				<a href="/login">Login</a>
+			</div>
+		</header>
+		
+		<div class="logo-container">
+			<a id="logo-link" href="/">
+				<div style="text-align: center;"><img src="/images/logo-siw.png" width="50%" /></div>
+			</a>
+		</div>
+		<div th:if="${artists}" class="panel">
+			<h1 style="text-align: center;" id="title">Elenco degli Artisti</h1>
+			
+			<form class="form-elements" th:action="@{/searchArtist}" method="POST">
+					
+					<div style="width: 50%; margin: auto auto 0 auto; display: grid; gap: 5px;">
+					<label>Cerca artista per cognome:</label>
+					<input type="text" th:value="${surname}" name="surname" required/>
+					</div>
+					
+					<span style="text-align: center;"><button type="submit">Cerca</button></span>
+					
+				</form>
+			
+			<div class="user-container" style="flex-direction: unset;">
+				<div style="margin: auto;" th:if="${artists==null || artists.isEmpty()}">L'archivio e' vuoto</div>
+				<div style="margin-top: 4px;">
+					<ul>
+						<li class="li" th:each="artist : ${artists}">
+							<a th:href="@{'/artist' + '/' + ${artist.id}}">
+								<h3><span class="li-text" th:text="${artist.name} + ' (' + ${artist.surname} + ')'">title</span></h3>
+								<img style="object-fit: cover;" class="img" width="160" height="220" th:src="${artist.getImgOfPictureBase64}">
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

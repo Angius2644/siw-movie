@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Scelta attori</title>
+		<link rel="stylesheet" href="/css/stile.css" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
+	</head>
+	<body>
+		<header>
+			<div th:if="${userDetails}">
+				<span th:text="${userDetails.username}"></span>
+				<a href="/logout">Logout</a>
+			</div>
+			<div th:unless="${user}">
+				<a href="/login">Login</a>
+			</div>
+		</header>
+		
+		<div class="logo-container">
+			<a id="logo-link" href="/">
+				<div style="text-align: center;"><img src="/images/logo-siw.png" width="50%" /></div>
+			</a>
+		</div>
+		<div class="panel">
+			<h1 style="text-align: center;" id="title" th:text="'Attori del film ' + ${movie.title}"></h1>
+			<div style="text-align: center;">Seleziona l'attore dal seguente elenco per eliminarlo dal film:</div>
+			
+			<div class="user-container" style="flex-direction: unset;">
+				<div class="textAddActor" th:if="${movie.actors.isEmpty()}">Non ci sono attori da rimuovere per questo film</div>
+				<div style="margin-top: 4px;">
+					<ul style="margin:auto;">
+						<li class="actorList" th:each="actor : ${movie.actors}">
+							<a th:href="@{'/admin/removeActorFromMovie/'+ ${actor.id}+'/'+${movie.id}}">
+								<h3><span class="li-text" th:text="${actor.name} + ' (' + ${actor.surname} + ')'">title</span></h3>
+								<img style="object-fit: cover;" width="120" height="152" th:src="${actor.getImgOfPictureBase64}">
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+	
+		<div style="text-align: center;">Seleziona l'attore dal seguente elenco per aggiungerlo al film:</div>
+			
+			<div class="user-container" style="flex-direction: unset;">
+				<div class="textAddActor" th:if="${actorsToAdd.isEmpty()}">Non ci sono attori da aggiungere per questo film</div>
+				<div style="margin-top: 4px;">
+					<ul style="margin:auto;">
+						<li class="actorList" th:each="actor : ${actorsToAdd}">
+							<a th:href="@{'/admin/addActorToMovie/'+ ${actor.id}+'/'+${movie.id}}">
+								<h3><span class="li-text" th:text="${actor.name} + ' (' + ${actor.surname} + ')'">title</span></h3>
+								<img style="object-fit: cover;" width="120" height="152" th:src="${actor.getImgOfPictureBase64}">
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div style="margin: auto;">
+			<a class="genericButton" th:href="@{'/admin/formUpdateMovie/'+ ${movie.id}}">Fine</a>
+			</div>
+		</div>
+	</body>
+</html>

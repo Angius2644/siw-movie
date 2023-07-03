@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Nuova Recensione</title>
+		<link rel="stylesheet" href="/css/stile.css" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
+	</head>
+	<body>
+		<header>
+			<div th:if="${userDetails}">
+				<span th:text="${userDetails.username}"></span>
+				<a href="/logout">Logout</a>
+			</div>
+			<div th:unless="${user}">
+				<a href="/login">Login</a>
+			</div>
+		</header>
+		
+		<div class="logo-container">
+			<a id="logo-link" href="/">
+				<div style="text-align: center;"><img src="/images/logo-siw.png" width="50%" /></div>
+			</a>
+		</div>
+		<div th:if="${movie}" class="panel">
+			<h1 style="text-align: center;" id="title">Scrivi una recensione su <span th:text="${movie.title}">nomeFilm</span></h1>
+			
+			<div class="user-container" style="flex-direction: unset;">
+				
+				<div class="info-panel">
+					<span th:if="${role != 'ADMIN'}"><a th:href="@{'/movie/' + ${movie.id}}"><img class="img-border" width="160" height="220" th:src="${movie.getCoverImageBase64}"/></a></span>
+					<span th:if="${role == 'ADMIN'}"><a th:href="@{'/admin/movie/' + ${movie.id}}"><img class="img-border" width="160" height="220" th:src="${movie.getCoverImageBase64}"/></a></span>
+					<span th:text="'Titolo: ' + ${movie.title}">Up!</span>
+					<span th:text="'Anno: ' + '(' + ${movie.year} + ')'">2000</span>
+					<span>Regista: <a th:if="${movie.director}" class="director" th:href="@{'/artist' + '/' + ${movie.director.id}}"><span th:text="${movie.director.name} + ' ' + ${movie.director.surname}">Regista</span></a></span>
+				</div>
+				<div class="review-panel">
+						<div class="review-form">
+							<form th:action="@{'/updateReview/' + ${review.id} + '/' +${movie.id}}" method="POST" th:object="${review}" accept-charset="UTF-8">
+
+								<div th:if="${#fields.hasGlobalErrors()}">
+									<p style="color: red;" th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
+								</div>
+								
+								<div class="review-element" style="float: inline-start; width: 42%;">
+									<label>Titolo:</label>
+									<input class="title-input" type="text" th:field="${review.title}" th:value="${review.title}"/>
+									<span style="color: red;" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">
+									</span>
+								</div>
+
+								<div class="review-element" style="float: inline-end;">
+									<label>Valutazione(1-5):</label>
+									<div><select name="Stars" th:field="${review.starRate}" th:value="${review.starRate}">
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+									</select></div>
+									<span style="color: red;" th:if="${#fields.hasErrors('starRate')}" th:errors="*{starRate}">
+									</span>
+								</div>
+
+								<div class="review-element">
+									<label>Recensione:</label>
+									<textarea  class="review-input" th:field="${review.description}" th:value="${review.description}"/>
+									<span style="color: red;" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">
+									</span>
+								</div>
+
+								<div class="review-element">
+									<span><button type="submit">Invia</button></span>
+								</div>
+							</form>
+
+					</div>
+			</div>
+		</div>
+		<div th:unless="${movie}" class="panel">
+			<div class="user-container">
+				<span class="div-value"><h2>Non Esiste.</h2></span>
+			</div>
+		</div>
+	</body>
+</html>

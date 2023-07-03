@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Dettagli Artista</title>
+		<link rel="stylesheet" href="/css/stile.css" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
+	</head>
+	<body>
+		<header>
+			<div th:if="${userDetails}">
+				<span th:text="${userDetails.username}"></span>
+				<a href="/logout">Logout</a>
+			</div>
+			<div th:unless="${user}">
+				<a href="/login">Login</a>
+			</div>
+		</header>
+		
+		<div class="logo-container">
+			<a id="logo-link" href="/">
+				<div style="text-align: center;"><img src="/images/logo-siw.png" width="50%" /></div>
+			</a>
+		</div>
+		<div th:if="${artist}" class="panel">
+			<h1 style="text-align: center;" id="title">Dettagli su <span th:text="${artist.name} + ' ' + ${artist.surname}">nomeCognomeArtista</span></h1>
+			
+			<div class="user-container" style="flex-direction: unset;">
+				
+				<div class="info-panel">
+					<span><img style="object-fit: cover;" width="160" height="220" th:src="${artist.getImgOfPictureBase64}"/></span>
+					<span th:text="${artist.name} + ' ' + ${artist.surname}">Dino Risi</span>
+					<span th:text="'(' + ${artist.dateOfBirth} + ')'">20/20/2000</span><span th:if="${artist.dateOfDeath}" th:text="'(' + ${artist.dateOfDeath} + ')'">dataMorte</span>
+				</div>
+				<div class="review-panel">
+
+					<div style="text-align: center;">Film in cui e' regista:</div>
+
+					<div class="user-container" style="flex-direction: unset;">
+						<div style="margin-top: 4px;">
+							<ul style="margin:auto;">
+								<li class="actorList" th:each="directedMovie : ${directedMovies}">
+									<a th:href="@{'/movie/'+ ${directedMovie.id}}">
+										<h3><span class="li-text" th:text="${directedMovie.title} + ' (' + ${directedMovie.year} + ')'">title</span></h3>
+										<img width="120" height="152" th:src="${directedMovie.getCoverImageBase64}">
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					
+					<div style="text-align: center;">Film in cui ha recitato:</div>
+					
+					<div class="user-container" style="flex-direction: unset;">
+						<div style="margin-top: 4px;">
+							<ul style="margin:auto;">
+								<li class="actorList" th:each="actedMovie : ${starredMovies}">
+									<a th:href="@{'/movie/'+ ${actedMovie.id}}">
+										<h3><span class="li-text" th:text="${actedMovie.title} + ' (' + ${actedMovie.year} + ')'">title</span></h3>
+										<img width="120" height="152" th:src="${actedMovie.getCoverImageBase64}">
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div th:unless="${artist}" class="panel">
+			<div class="user-container">
+				<span class="div-value"><h2>Non Esiste.</h2></span>
+			</div>
+		</div>
+	</body>
+</html>
